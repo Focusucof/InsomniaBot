@@ -93,7 +93,6 @@ client.on('message', async (message) => {
         let catName = msg1[1];
 
         let category = message.guild.channels.cache.find(cat => cat.name == catName && cat.type == 'category');
-        let categoryID = category.id;
 
         category.children.forEach(channel => channel.delete());
         category.delete();       
