@@ -22,7 +22,7 @@ client.on('message', async (message) => {
             url: "http://localhost:1337/party/v1/create",
             description: "Make sure the Insomnia Client is running",
             thumbnail: {
-                url: "https://cdn.discordapp.com/embed/avatars/0.png"
+                url: "https://cdn.discordapp.com/attachments/526150916814929990/839488210244993105/INS.png"
             }
         }
 
@@ -39,7 +39,7 @@ client.on('message', async (message) => {
                 title: message.author.username + '#' + message.author.discriminator + ' is hosting a game!',
                 description: ` [**Join**](http://localhost:1337/party/v1/join/${partyID})`,
                 thumbnail: {
-                    url: "https://cdn.discordapp.com/embed/avatars/0.png"
+                    url: "https://cdn.discordapp.com/attachments/526150916814929990/839488210244993105/INS.png"
                 },
                 timestamp: new Date(),
                 fields: [
