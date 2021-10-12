@@ -178,9 +178,7 @@ db.run('CREATE TABLE IF NOT EXISTS users (puuid TEXT PRIMARY KEY, name TEXT NOT 
  * {
  *     "puuid": string,
  *     "name": string,
- *     "rankid": number,
- *     "rank": string,
- *     "elo": number
+ *     "rankid": number
  * }
  * 
  */
@@ -205,12 +203,32 @@ app.post('/', async function(req, res) {
             console.log(row.puuid, row.name, row.rank, row.discordID);
         });
     }); */
-    db.get('SELECT rank, discordID FROM users WHERE puuid = ?', data.puuid, (err, row) => {
+    db.get('SELECT rank, discordID FROM users WHERE puuid = ?', data.puuid, async (err, row) => {
         const server = client.guilds.cache.get(process.env.SERVER_ID);
         let member = server.members.cache.get(row.discordID);
-        let role = server.roles.cache.find(role => role.name == row.rank);
+        let role = server.roles.cache.find(role => role.name == row.rank.split(' ')[0]);
+
         if (member) {
-            member.roles.add(row.rank.split(' ')[0]);
+            let ironRank = server.roles.cache.find(role => role.name == 'Iron');
+            let bronzeRank = server.roles.cache.find(role => role.name == 'Bronze');
+            let silverRank = server.roles.cache.find(role => role.name == 'Silver');
+            let goldRank = server.roles.cache.find(role => role.name == 'Gold');
+            let platinumRank = server.roles.cache.find(role => role.name == 'Platinum');
+            let diamondRank = server.roles.cache.find(role => role.name == 'Diamond');
+            let immortalRank = server.roles.cache.find(role => role.name == 'Immortal');
+            let radiantRank = server.roles.cache.find(role => role.name == 'Radiant');
+            //console.log(diamondRank);
+            await member.roles.remove(ironRank);
+            await member.roles.remove(bronzeRank);
+            await member.roles.remove(silverRank);
+            await member.roles.remove(goldRank);
+            await member.roles.remove(platinumRank);
+            await member.roles.remove(diamondRank);
+            await member.roles.remove(immortalRank);
+            await member.roles.remove(radiantRank);
+
+            //member.roles.add(role);
+            member.roles.add(role);
         }
     });
     res.send('OK');
