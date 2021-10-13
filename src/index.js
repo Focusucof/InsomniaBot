@@ -186,7 +186,7 @@ db.run('CREATE TABLE IF NOT EXISTS users (puuid TEXT PRIMARY KEY, name TEXT NOT 
 app.post('/', async function(req, res) {
     let data = {
         puuid: req.body.puuid,
-        name: req.body.name,
+        /* name: req.body.name, */
         rankID: req.body.rankID,
     }
 
